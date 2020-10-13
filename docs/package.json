@@ -1,0 +1,18 @@
+{
+  "name": "tutorial",
+  "version": "0.0.1",
+  "description": "现代前端教程",
+  "authors": {
+    "name": "lee",
+    "email": "445220716@qq.com"
+  },
+  "scripts": {
+    "dev": "vuepress dev src",
+    "build": "vuepress build src"
+  },
+  "license": "MIT",
+  "devDependencies": {
+    "vuepress": "^1.5.3",
+    "vuepress-plugin-auto-sidebar": "^1.5.0"
+  }
+}
