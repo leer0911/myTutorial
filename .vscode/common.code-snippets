@@ -1,0 +1,12 @@
+{
+  "img": {
+    "prefix": "img",
+    "body": ["![${2}](${1})"],
+    "description": "img"
+  },
+  "tip": {
+    "prefix": "tip",
+    "body": [":::tip ${1}", "", ":::"],
+    "description": "tip"
+  }
+}

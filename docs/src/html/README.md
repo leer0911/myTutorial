@@ -1,15 +1,16 @@
-# HTML 介绍
+# HTML 入门
 
-:::tip
+::: tip 问题列表
 
 - 什么是 HTML？
 - HTML 元素有哪些类别？
 - 什么是块级元素、内联元素，它们分别有哪些？
+- 什么是 HTML 元素语义？
 - 什么是 HTML 标签？
+- 如何添加 HTML 注释？
 - 如何给 `<a>` 添加超链接？
 - 如何禁用 `<input>`?
 - 如何在 HTML 页面中显示 <, >,",' 和 & 等特殊字符？
-- 什么是 HTML 注释？
 
 :::
 
@@ -39,6 +40,10 @@ HTML (HyperText Markup Language) 不是一门编程语言，而是一种用来�
 - [`<title>`](https://developer.mozilla.org/zh-CN/docs/Web/HTML/Element/title) 设置页面标题，出现在浏览器标签上，当你标记/收藏页面时它可用来描述页面。
 - [`<body>`](https://developer.mozilla.org/zh-CN/docs/Web/HTML/Element/body) 包含了你访问页面时所有显示在页面上的内容，文本，图片，音频，游戏等等
 
+## HTML 标签
+
+在 HTML 中，tag 用来创建一个 element。HTML 元素的名称是在尖括号中使用的名称，例如 `<p>` 用于段落（ paragraph ）。注意，结束标记的名称前面有一个斜杠字符"`</p>`"。在空元素中，结束标记既不需要也不允许。在任何情况下，如果没有提及 [attributes](https://developer.mozilla.org/zh-CN/docs/Glossary/Attribute) ，那么将使用默认值。
+
 ## HTML 元素
 
 一个典型的元素包括一个具有一些属性的开始标签，中间的文本内容和一个结束标签。
@@ -60,9 +65,13 @@ HTML (HyperText Markup Language) 不是一门编程语言，而是一种用来�
 > 元素和标签不是同一种概念。源代码中的标签用来标识元素的开始或结束，而元素是文档对象模型（[DOM](https://developer.mozilla.org/zh-CN/docs/Glossary/DOM)）中的一部分，文档对象模型会被浏览器渲染、展示为页面。(该部分内容会放在后续章节讲解)
 > HTML5 重新定义了元素的类别：见 [元素内容分类](https://developer.mozilla.org/zh-CN/docs/Web/Guide/HTML/Content_categories)
 
-## HTML 标签
+### HTML 元素语义
 
-在 HTML 中，tag 用来创建一个 element。HTML 元素的名称是在尖括号中使用的名称，例如 `<p>` 用于段落（ paragraph ）。注意，结束标记的名称前面有一个斜杠字符"`</p>`"。在空元素中，结束标记既不需要也不允许。在任何情况下，如果没有提及 [attributes](https://developer.mozilla.org/zh-CN/docs/Glossary/Attribute) ，那么将使用默认值。
+使用符合语义的 HTML 元素编写网页，比如：
+
+![](./../assets/img/sem_elements.gif)
+
+建议阅读 [HTML 文字处理基础](https://developer.mozilla.org/zh-CN/docs/learn/HTML/Introduction_to_HTML/HTML_text_fundamentals)
 
 ## HTML 注释
 
@@ -79,11 +88,20 @@ HTML (HyperText Markup Language) 不是一门编程语言，而是一种用来�
 ## 编码注意事项
 
 - HTML 标签**不区分大小写**，不过，从一致性、可读性等各方面来说，最好仅使用小写字母。
+
 - 在 HTML 中，字符 <, >,",' 和 & 是特殊字符. 它们是 HTML 语法自身的一部分。必须使用时，可以使用字符引用，如 `<` 用 `&lt;` 表示
+
 - 无论你在 HTML 元素的内容中使用多少空格(包括空白字符，包括换行)，当渲染这些代码的时候，HTML 解释器会将连续出现的空白字符减少为一个单独的空格符
+
 - 在我们的 HTML 代码中，我们让每一个嵌套的元素以两个空格缩进。 你使用什么风格来格式化你的代码取决于你 (比如所对于每层缩进使用多少个空格)，但是你应该坚持使用某种风格
 
-## 其他
+## 了解更多
 
+- [文档与网站架构](https://developer.mozilla.org/zh-CN/docs/learn/HTML/Introduction_to_HTML/%E6%96%87%E4%BB%B6%E5%92%8C%E7%BD%91%E7%AB%99%E7%BB%93%E6%9E%84)
+- [怪异模式和标准模式](https://developer.mozilla.org/zh-CN/docs/Web/HTML/Quirks_Mode_and_Standards_Mode)
+- [高阶文字排版](https://developer.mozilla.org/zh-CN/docs/Learn/HTML/Introduction_to_HTML/Advanced_text_formatting)
+- [可访问性](https://developer.mozilla.org/zh-CN/docs/learn/Accessibility)
 - [HTML 元素参考](https://developer.mozilla.org/zh-CN/docs/Web/HTML/Element)
+- [HTML 元素全局属性](https://developer.mozilla.org/zh-CN/docs/Web/HTML/Global_attributes)
 - [自定义元素](https://wiki.developer.mozilla.org/zh-CN/docs/Web/Web_Components/Using_custom_elements)
+- [HTML 常见问题](https://developer.mozilla.org/zh-CN/docs/Learn/HTML/Howto)

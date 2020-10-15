@@ -63,4 +63,12 @@ module.exports = {
     "@vuepress/plugin-medium-zoom",
     "vuepress-plugin-auto-sidebar",
   ],
+
+  configureWebpack: {
+    resolve: {
+      alias: {
+        "@img": "../assets/img",
+      },
+    },
+  },
 };
