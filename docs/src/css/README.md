@@ -9,6 +9,10 @@
 - 优先级是如何计算的？
 - `!important` 有什么作用？
 - CSS 简写属性有哪些，需要注意什么？
+- 什么是层叠上下文？
+- CSS 中哪些属性会影响文档中元素的层叠上下文？
+- 什么是块格式化上下文？
+- 什么是外边距重叠？
 
 :::
 
@@ -110,13 +114,99 @@ h1,
 
 > 注: 通用选择器 (\*)，组合符 (+, >, ~, ' ')，和否定伪类 (:not) 不会影响优先级。
 
-### [简写属性](https://developer.mozilla.org/zh-CN/docs/Web/CSS/Shorthand_properties)
+## [简写属性](https://developer.mozilla.org/zh-CN/docs/Web/CSS/Shorthand_properties)
 
 简写属性是可以让你同时设置好几个 CSS 属性值的 CSS 属性。使用简写属性，Web 开发人员可以编写更简洁、更具可读性的样式表，节省时间和精力
 
 CSS 规范定义简写属性的目的在于将那些关于同一主题的常见属性的定义集中在一起。比如 CSS 的 background 属性就是一个简写属性，它可以定义 background-color、background-image、background-repeat 和 background-position 的值。类似地，最常见的字体相关的属性可以使用 font 的简写，盒子（box）各方向的外边距（margin） 可以使用 margin 这个简写。
 
 > 注意，这部分细节比较多，初学者记不住也没关系，随时可以参考文档来查看细节
+
+## [层叠上下文](https://developer.mozilla.org/zh-CN/docs/Web/Guide/CSS/Understanding_z_index/The_stacking_context)
+
+我们假定用户正面向（浏览器）视窗或网页，而 HTML 元素沿着其相对于用户的一条虚构的 z 轴排开，层叠上下文就是对这些 HTML 元素的一个三维构想。众 HTML 元素基于其元素属性按照优先级顺序占据这个空间。
+
+- 层叠上下文可以包含在其他层叠上下文中，并且一起创建一个层叠上下文的层级
+
+- 每个层叠上下文都完全独立于它的兄弟元素：当处理层叠时只考虑子元素
+
+- 每个层叠上下文都是自包含的：当一个元素的内容发生层叠后，该元素将被作为整体在父级层叠上下文中按顺序进行层叠
+
+文档中的层叠上下文由满足以下任意一个条件的元素形成：
+
+- 文档根元素（`<html>`）；
+
+- position 值为 absolute（绝对定位）或 relative（相对定位）且 z-index 值不为 auto 的元素；
+
+- position 值为 fixed（固定定位）或 sticky（粘滞定位）的元素（沾滞定位适配所有移动设备上的浏览器，但老的桌面浏览器不支持）；
+
+- flex (flexbox) 容器的子元素，且 z-index 值不为 auto；
+
+- grid (grid) 容器的子元素，且 z-index 值不为 auto；
+
+- opacity 属性值小于 1 的元素（参见 the specification for opacity）；
+
+- 以下任意属性值不为 none 的元素：
+
+  - transform
+  - filter
+  - perspective
+  - clip-path
+  - mask / mask-image / mask-border
+
+- will-change 值设定了任一属性而该属性在 non-initial 值时会创建层叠上下文的元素（参考这篇文章）；
+
+- contain 属性值为 layout、paint 或包含它们其中之一的合成值（比如 contain: strict、contain: content）的元素。
+
+## [块格式化上下文](https://developer.mozilla.org/zh-CN/docs/Web/Guide/CSS/Block_formatting_context)
+
+块格式化上下文（Block Formatting Context，BFC） 是 Web 页面的可视 CSS 渲染的一部分，是块盒子的布局过程发生的区域，也是浮动元素与其他元素交互的区域
+
+下列方式会创建块格式化上下文：
+
+- 根元素（`<html>`）
+
+- 浮动元素（元素的 float 不是 none）
+
+- 绝对定位元素（元素的 position 为 absolute 或 fixed）
+
+- 行内块元素（元素的 display 为 inline-block）
+
+- 表格单元格（元素的 display 为 table-cell，HTML 表格单元格默认为该值）
+
+- 表格标题（元素的 display 为 table-caption，HTML 表格标题默认为该值）匿名表格单元格元素（元素的 display 为 table、table-row、table-row-group、table-header-group、table-footer-group（分别是 HTML table、row、tbody、thead、tfoot 的默认属性）或 inline-table）
+
+- overflow 值不为 visible 的块元素
+
+- display 值为 flow-root 的元素
+
+- contain 值为 layout、content 或 paint 的元素
+
+- 弹性元素（display 为 flex 或 inline-flex 元素的直接子元素）
+
+- 网格元素（display 为 grid 或 inline-grid 元素的直接子元素）
+
+- 多列容器（元素的 column-count 或 column-width 不为 auto，包括 column-count 为 1）
+
+- column-span 为 all 的元素始终会创建一个新的 BFC，即使该元素没有包裹在一个多列容器中（标准变更，Chrome bug）。
+
+## [外边距重叠](https://developer.mozilla.org/zh-CN/docs/Web/CSS/CSS_Box_Model/Mastering_margin_collapsing)
+
+块的上外边距(margin-top)和下外边距(margin-bottom)有时合并(折叠)为单个边距，其大小为单个边距的最大值(或如果它们相等，则仅为其中一个)，这种行为称为边距折叠。
+
+有三种情况会形成外边距重叠：
+
+- 相邻的两个元素之间的外边距重叠，除非后一个元素加上 [clear-fix 清除浮动](https://developer.mozilla.org/zh-CN/docs/Web/CSS/clear)
+- 没有内容将父元素和后代元素分开
+- 空的块级元素
+
+## [图像、媒体和表单元素](https://developer.mozilla.org/zh-CN/docs/Learn/CSS/Building_blocks/Images_media_form_elements)
+
+在 CSS 中，某些特殊元素是怎样处理的。图像、其他媒体和表格元素的表现和普通的盒子有些不同，这取决于你使用 CSS 格式化它们的能力。理解什么可能做到，什么不可能做到能够省些力气。
+
+图像和视频被描述为[替换元素](https://developer.mozilla.org/zh-CN/docs/Web/CSS/Replaced_element)，这意味着 CSS 不能影响这些元素的内部布局-仅影响它们在页面上于其他元素中的位置。另外，替换元素在成为网格或者弹性布局的一部分时，有不同的默认行为。
+
+对于表单的样式，推荐阅读[样式化 HTML 表单](https://developer.mozilla.org/zh-CN/docs/Learn/HTML/Forms/Styling_HTML_forms)
 
 ## 推荐阅读
 
@@ -128,6 +218,7 @@ CSS 规范定义简写属性的目的在于将那些关于同一主题的常见�
 - [颜色](https://developer.mozilla.org/zh-CN/docs/Web/CSS/color_value)
 - [字体大小](https://developer.mozilla.org/zh-CN/docs/Web/CSS/font-size)
 - [动画](https://developer.mozilla.org/zh-CN/docs/Web/CSS/CSS_Animations)
+- [CSS 属性值定义语法](https://developer.mozilla.org/zh-CN/docs/Web/CSS/Value_definition_syntax)
+- [CSS 单位与取值类型](https://developer.mozilla.org/zh-CN/docs/Web/CSS/Value_definition_syntax)
 - [CSS 的值与单位](https://developer.mozilla.org/zh-CN/docs/Learn/CSS/Building_blocks/Values_and_units)
-- [视觉格式化模型](https://developer.mozilla.org/zh-CN/docs/Web/Guide/CSS/Visual_formatting_model)
-- [CSS 基础框盒模型](https://developer.mozilla.org/zh-CN/docs/Web/CSS/CSS_Box_Model)
+- [CSS 常见问题](https://developer.mozilla.org/zh-CN/docs/Learn/CSS/Howto)

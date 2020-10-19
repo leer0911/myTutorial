@@ -3,6 +3,12 @@
 :::tip 问题列表
 
 - 什么是盒模型？
+- CSS 有哪些定位规则？
+- 什么是溢出，以及如何控制它？
+- 使用 CSS 为页面中元素设定尺寸的方法？
+- 什么是元素尺寸、固有尺寸？
+- CSS 有哪些布局模式？
+- 什么是弹性盒布局及其优势？
 
 :::
 
@@ -61,6 +67,36 @@ CSS 中组成一个块级盒子需要:
 
 [更多](https://developer.mozilla.org/zh-CN/docs/Web/CSS/All_About_The_Containing_Block)
 
+## CSS 定位规则
+
+一旦生成了盒子以后，CSS 引擎就需要定位它们以完成布局。下面是定位盒子时所使用的规则：
+
+- 普通流：按照次序依次定位每个盒子
+
+  - 当 CSS 的 position 属性为 static 或 relative，并且 float 为 none 时，其布局方式为普通流。
+
+- 浮动：将盒子从普通流中单独拎出来，将其放到外层盒子的某一边
+
+  - 一个盒子的 float 值不为 none，并且其 position 为 static 或 relative 时，该盒子为浮动定位
+
+- 绝对定位：按照绝对位置来定位盒子，其位置根据盒子的包含元素所建立的绝对坐标系来计算，因此绝对定位元素有可能会覆盖其他元素
+
+  - 如果元素的 position 为 absolute 或 fixed，该元素为绝对定位
+
+## [溢出](https://developer.mozilla.org/zh-CN/docs/Learn/CSS/Building_blocks/Overflowing_content)
+
+CSS 中万物皆盒，因此我们可以通过给 width 和 height（或者 inline-size 和 block-size）赋值的方式来约束盒子的尺寸。溢出是在你往盒子里面塞太多东西的时候发生的，所以盒子里面的东西也不会老老实实待着。
+
+[overflow](https://developer.mozilla.org/zh-CN/docs/Web/CSS/overflow) 属性是你控制一个元素溢出的方式，它告诉浏览器你想怎样处理溢出。overflow 的默认值为 visible，这就是我们的内容溢出的时候，我们在默认情况下看到它们的原因。
+
+## 在 CSS 中调整大小
+
+在受 CSS 设置影响之前，HTML 元素有其原始的尺寸。一个直观的例子就是图像。一副图像的长和宽由这个图像文件自身确定。这个尺寸就是固有尺寸。
+
+我们可以给元素一个具体的 width 和 height 值, 然后不论我们放什么内容进去它都是该尺寸。 （当给元素指定尺寸（然后其内容需要适合该尺寸）时，我们将其称为外部尺寸）
+
+除了让万物都有一个确定的大小以外，我们可以让 CSS 给定一个元素的最大或最小尺寸。如果你有一个包含了变化容量的内容的盒子，而且你总是想让它至少有个确定的高度，你应该给它设置一个 min-height 属性。max-width 的常见用法为，在没有足够空间以原有宽度展示图像时，让图像缩小，同时确保它们不会比这一宽度大。
+
 ## CSS 布局模式
 
 布局是一种基于盒子与其兄弟和祖辈盒子的交互方式来确定盒子的位置和大小的算法。有以下几种形式：
@@ -72,6 +108,45 @@ CSS 中组成一个块级盒子需要:
 - [弹性盒子布局](https://developer.mozilla.org/zh-CN/docs/Web/CSS/CSS_Flexible_Box_Layout/Using_CSS_flexible_boxes)：用来布置那些可以顺利调整大小的复杂页面。
 - [网格布局](https://developer.mozilla.org/zh-CN/docs/Web/CSS/CSS_Grid_Layout)：用来布置那些与一个固定网格相关的元素。
 
+## [弹性盒布局](https://developer.mozilla.org/zh-CN/docs/Web/CSS/CSS_Flexible_Box_Layout/Using_CSS_flexible_boxes)
+
+CSS3 弹性盒子(Flexible Box 或 Flexbox)，是一种用于在页面上布置元素的布局模式。对于许多应用程序，弹性盒子模型提供了对块模型的改进，因为它不使用浮动，flex 容器的边缘也不会与其内容的边缘折叠。
+
+![](../assets/img/flexbox.png)
+
+- 弹性容器(Flex container)
+  包含着弹性项目的父元素。通过设置 display 属性的值为 flex 或 inline-flex 来定义弹性容器。
+
+- 弹性项目(Flex item)
+  弹性容器的每个子元素都称为弹性项目。弹性容器直接包含的文本将被包覆成匿名弹性单元。
+
+- 轴(Axis)
+  每个弹性框布局包含两个轴。弹性项目沿其依次排列的那根轴称为主轴(main axis)。垂直于主轴的那根轴称为侧轴(cross axis)。
+
+  - flex-direction 确立主轴。
+  - justify-content 定义了在当前行上，弹性项目沿主轴如何排布。
+  - align-items 定义了在当前行上，弹性项目沿侧轴默认如何排布。
+  - align-self 定义了单个弹性项目在侧轴上应当如何对齐，这个定义会覆盖由 align-items 所确立的默认值。
+
+- 方向(Direction)
+  弹性容器的主轴起点(main start)/主轴终点(main end)和侧轴起点(cross start)/侧轴终点(cross end)描述了弹性项目排布的起点与终点。它们具体取决于弹性容器的主轴与侧轴中，由 writing-mode 确立的方向（从左到右、从右到左，等等）。
+
+  - order 属性将元素与序号关联起来，以此决定哪些元素先出现。
+  - flex-flow 属性是 flex-direction 和 flex-wrap 属性的简写，决定弹性项目如何排布。
+
+- 行(Line)
+  根据 flex-wrap 属性，弹性项目可以排布在单个行或者多个行中。此属性控制侧轴的方向和新行排列的方向。
+
+- 尺寸(Dimension)
+  根据弹性容器的主轴与侧轴，弹性项目的宽和高中，对应主轴的称为主轴尺寸(main size) ，对应侧轴的称为 侧轴尺寸(cross size)。
+
+  - min-height 与 min-width 属性初始值将为 0。
+  - flex 属性是 flex-grow、flex-shrink 和 flex-basis 属性的简写，描述弹性项目的整体的伸缩性。
+
 ## 推荐阅读
 
+- [CSS 基础框盒模型](https://developer.mozilla.org/zh-CN/docs/Web/CSS/CSS_Box_Model)
 - [CSS 布局](https://developer.mozilla.org/zh-CN/docs/Learn/CSS/CSS_layout)
+- [视觉格式化模型](https://developer.mozilla.org/zh-CN/docs/Web/Guide/CSS/Visual_formatting_model)
+- [使用 CSS 弹性盒子](https://developer.mozilla.org/zh-CN/docs/Web/CSS/CSS_Flexible_Box_Layout/Using_CSS_flexible_boxes)
+- [CSS 布局手册](https://developer.mozilla.org/zh-CN/docs/Web/CSS/Layout_cookbook)
