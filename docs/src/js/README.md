@@ -14,8 +14,6 @@
 
 :::
 
-学习编程，语法本身并不难，真正困难的是如何应用它来解决现实世界的问题。「 牢记初心，砥砺前行 」
-
 ## [什么是 JavaScript](https://developer.mozilla.org/zh-CN/docs/Learn/JavaScript/First_steps/What_is_JavaScript)
 
 JavaScript 是一种脚本，一门编程语言，它可以在网页上实现复杂的功能，网页展现给你的不再是简单的静态信息，而是实时的内容更新，交互式的地图，2D/3D 动画，滚动播放的视频等等。
@@ -315,9 +313,138 @@ shopping;
 
 建议跟着 MDN 中，[数组](https://developer.mozilla.org/zh-CN/docs/Learn/JavaScript/First_steps/Arrays) 这章认真学习一遍。
 
-## 练习
+### 练习
 
 - [笑话生成器](https://developer.mozilla.org/zh-CN/docs/Learn/JavaScript/First_steps/Silly_story_generator)
+
+## [条件语句](https://developer.mozilla.org/zh-CN/docs/Learn/JavaScript/Building_blocks/conditionals)
+
+- if ... else 语句
+
+  ```js
+  // 伪代码
+  if (condition) {
+    code to run if condition is true
+  } else {
+    run some other code instead
+  }
+  ```
+
+- switch 语句
+
+  ```js
+  switch (expression) {
+  case choice1:
+    run this code
+    break;
+
+  case choice2:
+    run this code instead
+    break;
+
+  // include as many cases as you like
+
+  default:
+    actually, just run this code
+  }
+  ```
+
+- 比较运算符
+
+  - `===` 和 `!==` — 判断一个值是否严格等于，或不等于另一个。
+  - `<` 和 `>` — 判断一个值是否小于，或大于另一个。
+  - `<=` 和 `>=` — 判断一个值是否小于或等于，或者大于或等于另一个。
+
+- 逻辑运算符：&& , || 和 !
+
+  - `&&` — 逻辑与; 使得并列两个或者更多的表达式成为可能，只有当这些表达式每一个都返回 `true` 时，整个表达式才会返回 `true`.
+  - `||` — 逻辑或; 当两个或者更多表达式当中的任何一个返回 `true` 则整个表达式将会返回 `true`.
+  - `!` — 逻辑非; 对一个布尔值取反, 非 `true` 返回 `false`,非 `false` 返回 `true`.
+
+- 三元运算符
+
+  ```js
+  // 伪代码
+  ( condition ) ? run this code : run this code instead
+  ```
+
+## [循环语句](https://developer.mozilla.org/zh-CN/docs/Learn/JavaScript/Building_blocks/Looping_code)
+
+编程中的循环也是一直重复着去做一件事 - 此处循环便是编程中的术语。
+
+一段循环通常需要一个或多个条件：
+
+- 一个开始条件，它被初始化为一个特定的值 - 这是循环的起点。
+- 一个结束条件，这是循环停止的标准 - 通常计数器达到一定值。以上所说的“我有足够的食物”吗？ 假设他需要 10 份食物来养活他的家人。
+- 一个迭代器，这通常在每个连续循环上递增少量的计数器，直到达到退出条件。 我们以前没有明确说明，但是我们可以考虑一下农民能够每小时收集 2 份食物。 每小时后，他收集的食物量增加了两倍，他检查他是否有足够的食物。 如果他已经达到 10 分（退出条件），他可以停止收集回家。
+
+```js
+// 伪代码
+loop(food = 0; foodNeeded = 10) {
+  if (food = foodNeeded) {
+    exit loop;
+    // 我们有足够的食物了，回家吧。
+  } else {
+    food += 2; // 花一个小时多收集两个食物。
+    // 循环将会继续执行。
+  }
+}
+```
+
+JavaScript 中提供了这些循环语句：
+
+- [for 语句](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Guide/Loops_and_iteration#for_%E8%AF%AD%E5%8F%A5)
+- [do...while 语句](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Guide/Loops_and_iteration#do...while_%E8%AF%AD%E5%8F%A5)
+- [while 语句](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Guide/Loops_and_iteration#while_%E8%AF%AD%E5%8F%A5)
+- [labeled 语句](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Guide/Loops_and_iteration#labeled_%E8%AF%AD%E5%8F%A5)
+- [break 语句](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Guide/Loops_and_iteration#break_%E8%AF%AD%E5%8F%A5)
+- [continue 语句](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Guide/Loops_and_iteration#continue_%E8%AF%AD%E5%8F%A5)
+- [for...in 语句](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Guide/Loops_and_iteration#for...in_%E8%AF%AD%E5%8F%A5)
+- [for...of 语句](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Guide/Loops_and_iteration#for...of_%E8%AF%AD%E5%8F%A5)
+
+### 应该使用哪种循环类型？
+
+对于基本用途，for，while 和 do ... while 循环大部分可互换。 他们都可以用来解决相同的问题，你使用哪一个将在很大程度上取决于你的个人偏好 - 哪一个你最容易记住或最直观的。我们建议使用 for，因为它可能是最简单地帮你记住一切 - 初始化程序，退出条件和最终表达式都必须整齐地放入括号，所以很容易看到他们在哪里并检查你没有丢失他们
+
+## 函数
+
+JavaScript 函数用 `function` 关键字定义，后面跟着函数名和圆括号。
+
+一个函数定义（也称为函数声明，或函数语句）由一系列的 `function` 关键字组成，依次为：
+
+- 函数的名称。
+- 函数参数列表，包围在括号中并由逗号分隔。
+- 定义函数的 JavaScript 语句，用大括号 `{}` 括起来。
+
+```js
+function square(number) {
+  return number * number;
+}
+```
+
+## [表达式与运算符](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Guide/Expressions_and_Operators)
+
+JavaScript 拥有二元和一元运算符， 和一个特殊的三元运算符（条件运算符）。一个二元运算符需要两个操作数，分别在运算符的前面和后面：
+
+```
+操作数1 运算符 操作数2
+```
+
+例如, 3+4 或 x\*y。
+
+一个一元运算符需要一个操作数，在运算符前面或后面：
+
+```
+运算符 操作数
+```
+
+或
+
+```
+操作数 运算符
+```
+
+例如, x++ 或 ++x。
 
 ## 推荐阅读
 
@@ -328,3 +455,16 @@ shopping;
 - [什么是浏览器开发者工具？](https://developer.mozilla.org/zh-CN/docs/Learn/Discover_browser_developer_tools)
 - [var 描述](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Statements/var)
 - [词法文法](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Lexical_grammar)
+- [JavaScript 函数详细参考文档](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions)
+- [表达式和运算符](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Operators)
+- [数字和日期](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Guide/Numbers_and_dates)
+- [字符串与文本内容](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Guide/Text_formatting)
+- [正则表达式](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Guide/Regular_Expressions)
+- [索引集合类 (Indexed collections)](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Guide/Indexed_collections)
+- [带键的集合](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Guide/Keyed_Collections)
+- [使用对象](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Guide/Working_with_Objects)
+- [继承与原型链](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Guide/Working_with_Objects)
+- [使用 Promise](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Guide/Using_promises)
+- [迭代器和生成器](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Guide/Iterators_and_Generators)
+- [元编程](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Guide/Meta_programming)
+- [JavaScript modules 模块](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Guide/Modules)
