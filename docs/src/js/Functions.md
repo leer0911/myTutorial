@@ -248,5 +248,6 @@ var createPet = function(name) {
 
 ## 推荐阅读
 
+[闭包](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Closures)
 [箭头函数](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Functions/Arrow_functions)
 [this](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Operators/this)
